@@ -1,26 +1,23 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
-let tarefas = [];
-
-app.get('/api/getAll', (req, res) => {
-  res.json(tarefas);
+// ROTA TESTE (IMPORTANTE)
+app.get("/", (req, res) => {
+  res.send("API funcionando 🚀");
 });
 
-app.post('/api/add', (req, res) => {
-  tarefas.push(req.body);
-  res.json({ ok: true });
-});
+// ROTA SOMA
+app.get("/api/soma/:a/:b", (req, res) => {
+  const a = parseInt(req.params.a);
+  const b = parseInt(req.params.b);
 
-app.delete('/api/remove/:index', (req, res) => {
-  const i = parseInt(req.params.index);
-  tarefas.splice(i, 1);
-  res.json({ ok: true });
+  const resultado = a + b;
+
+  res.send(`Resultado: ${resultado}`);
 });
 
 const PORT = process.env.PORT || 3000;
